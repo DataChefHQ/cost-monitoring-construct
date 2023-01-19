@@ -29,7 +29,7 @@ const budgetStratgy = new ApplicationBudgetStrategy(monitoringStack, {
    ],
    subscribers: [
      'internal-service-notif-aaaaht4ubhydfc344peefwt6ye@datachef-engineering.slack.com',
-     'kiarash.kiani@datachef.nl',
+     'alert@example.com',
    ]
 });
 ```

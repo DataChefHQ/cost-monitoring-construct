@@ -20,7 +20,7 @@ describe('An ApplicationBudgetStrategy', () => {
                 mockAppSecondStack,
             ],
             subscribers: [
-                'kiarash.kiani@datachef.nl',
+                'alert@example.com',
                 'kiarash@kiani.info',
             ]
         });

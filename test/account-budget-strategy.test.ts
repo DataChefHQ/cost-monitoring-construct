@@ -14,7 +14,7 @@ class MockStack extends Stack {
             monthlyBudgetInDollars: 100,
             defaultTopic: 'mocked-topic',
             subscribers: [
-                'kiarash.kiani@datachef.nl',
+                'alert@example.com',
                 'kiarash@kiani.info',
             ]
         });
