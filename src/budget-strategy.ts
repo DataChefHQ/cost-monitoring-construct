@@ -41,7 +41,7 @@ export abstract class IBudgetStrategy {
   /**
    * creates all the daily, monthly, quaryerly, and yearly budgets based on the implementation of the related methods.
    */
-  public createAlerts(): void {
+  public createBudgets(): void {
     this.createDailyBudgets(this.dailyLimit, this.createAllSubscribers());
     this.createMonthlyBudgets(this.monthlyLimit, this.createAllSubscribers());
     this.createQuarterlyBudgets(this.quarterlyLimit, this.createAllSubscribers());

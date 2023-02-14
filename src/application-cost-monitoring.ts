@@ -92,7 +92,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    */
   public monitor(): void {
     this.tagAllStacks();
-    this.createAlerts();
+    this.createBudgets();
   }
 
   protected get applicationTagKey(): string {
