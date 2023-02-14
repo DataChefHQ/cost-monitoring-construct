@@ -95,6 +95,9 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
     this.createBudgets();
   }
 
+  /**
+   * Default key name for application tag.
+   */
   protected get applicationTagKey(): string {
     return 'cm:application';
   }
