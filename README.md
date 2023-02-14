@@ -28,7 +28,6 @@ const costMonitoring = new ApplicationCostMonitoring(monitoringStack, {
        firstStack
    ],
    subscribers: [
-     'service-notif-aaaaht4ubhydfc344peefwt6ye@internal-engineering.slack.com',
      'alert@example.com',
    ]
 });
