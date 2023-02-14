@@ -4,7 +4,7 @@ import { aws_sns as sns } from 'aws-cdk-lib';
 import { aws_budgets as budgets } from 'aws-cdk-lib';
 
 export interface BudgetStrategyProps {
-  monthlyBudgetInDollars: number;
+  monthlyLimitInDollars: number;
   defaultTopic?: string;
   subscribers?: Array<Email>;
 }
@@ -33,19 +33,19 @@ export abstract class IBudgetStrategy {
     }
   }
 
-  protected abstract createDailyAlerts(dailyBudget: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void;
-  protected abstract createMonthlyAlerts(monthlyBudget: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void;
-  protected createQuarterlyAlerts(quarterlyBudget: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void { };
-  protected createYearlyAlerts(yearlyBudget: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void { };
+  protected abstract createDailyBudgets(dailyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void;
+  protected abstract createMonthlyBudgets(monthlyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void;
+  protected createQuarterlyBudgets(quarterlyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void { };
+  protected createYearlyBudgets(yearlyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void { };
 
   /**
-   * creates all the daily, monthly, quaryerly, and yearly alerts based on the implementation of the related methods.
+   * creates all the daily, monthly, quaryerly, and yearly budgets based on the implementation of the related methods.
    */
   public createAlerts(): void {
-    this.createDailyAlerts(this.dailyBudget, this.createAllSubscribers());
-    this.createMonthlyAlerts(this.monthlyBudget, this.createAllSubscribers());
-    this.createQuarterlyAlerts(this.quarterlyBudget, this.createAllSubscribers());
-    this.createYearlyAlerts(this.yearlyBudget, this.createAllSubscribers());
+    this.createDailyBudgets(this.dailyLimit, this.createAllSubscribers());
+    this.createMonthlyBudgets(this.monthlyLimit, this.createAllSubscribers());
+    this.createQuarterlyBudgets(this.quarterlyLimit, this.createAllSubscribers());
+    this.createYearlyBudgets(this.yearlyLimit, this.createAllSubscribers());
   }
 
   private createAllSubscribers(): Array<budgets.CfnBudget.SubscriberProperty> {
@@ -90,30 +90,30 @@ export abstract class IBudgetStrategy {
   }
 
   /**
-   * calculates daily budget based on the provided daily budget.
+   * calculates daily limit based on the provided monthly limit.
    */
-  public get dailyBudget(): number {
-    return Math.floor(this.monthlyBudget / 30);
+  public get dailyLimit(): number {
+    return Math.floor(this.monthlyLimit / 30);
   }
 
   /**
-   * returns montly budget.
+   * returns montly limit.
    */
-  public get monthlyBudget(): number {
-    return this.props.monthlyBudgetInDollars;
+  public get monthlyLimit(): number {
+    return this.props.monthlyLimitInDollars;
   }
 
   /**
-   * calculates quarterly budget based on the provided daily budget.
+   * calculates quarterly limit based on the provided monthly limit.
    */
-  public get quarterlyBudget(): number {
-    return this.monthlyBudget * 3;
+  public get quarterlyLimit(): number {
+    return this.monthlyLimit * 3;
   }
 
   /**
-   * calculates yearly budget based on the provided daily budget.
+   * calculates yearly limit based on the provided daily budget.
    */
-  public get yearlyBudget(): number {
-    return this.dailyBudget * 365;
+  public get yearlyLimit(): number {
+    return this.dailyLimit * 365;
   }
 }
