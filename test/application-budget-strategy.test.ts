@@ -38,12 +38,12 @@ describe('An ApplicationBudgetStrategy', () => {
         subject.resourceCountIs(AWSResourceType.SNSTopic, 1);
     });
 
-    it('should filter resources with `bm:application` tag key', () => {
+    it('should filter resources with `cm:application` tag key', () => {
         subject.hasResourceProperties(AWSResourceType.Budget, {
             "Budget": {
                 "CostFilters": {
                     "TagKeyValue": [
-                        "user:bm:application$mock-application"
+                        "user:cm:application$mock-application"
                     ]
                 },
             },

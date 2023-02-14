@@ -96,6 +96,6 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
   }
 
   protected get applicationTagKey(): string {
-    return 'bm:application';
+    return 'cm:application';
   }
 }

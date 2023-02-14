@@ -9,7 +9,7 @@ This is the default strategy for monitoring CDK applications. You have to provid
 
 The `ApplicationCostMonitoring` will always use the first stack (the first parameter of the initializer) to inject its resources into it. You can create a separate stack and pass it as the first stack if you wish to keep budget monitoring separate from your stacks. The budget monitoring class will monitor both the first stack and stacks from `otherStacksIncludedInBudget`.
 
-⚠️ **Important Note**: ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must activate the `bm:application` tag key under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
+⚠️ **Important Note**: ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must activate the `cm:application` tag key under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
 
 The example below shows how to use `ApplicationCostMonitoring` to track your application in CDK code:
 ```typescript
