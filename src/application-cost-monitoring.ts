@@ -19,7 +19,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * @param stack - default stack to track its resources and it will be used to define Budget resources in it.
    * @param props.applicationName - the name of application to label resources with it.
    * @param props.otherStacksIncludedInBudget - optional other stack to track their resources alog with the default stack.
-   * @param props.monthlyLimit - montly limit in US Dollors.
+   * @param props.monthlyLimitInDollars - montly limit in US Dollors.
    * @param props.defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
    * @param props.subscribers - list of email address that the CostMonitoring will use to send alerts to.
    * 
@@ -30,7 +30,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * const secondStack = new SecondStack(app, 'SecondStack', {});
    * const costMonitoring = new ApplicationCostMonitoring(firstStack, {
    *   applicationName: 'my-application',
-   *   monthlyBudget: 200,
+   *   monthlyLimitInDollars : 200,
    *  // Optional (you can add as many stack as you want)
    *   otherStacksToMonitor: [
    *     secondStack
