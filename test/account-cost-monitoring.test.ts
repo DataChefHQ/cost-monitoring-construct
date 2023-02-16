@@ -15,7 +15,6 @@ class MockStack extends Stack {
             defaultTopic: 'mocked-topic',
             subscribers: [
                 'alert@example.com',
-                'kiarash@kiani.info',
             ]
         });
 
