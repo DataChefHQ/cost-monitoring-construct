@@ -1,17 +1,17 @@
-import { AccountBudgetStrategy } from '../src';
+import { AccountCostMonitoring } from '../src';
 import { App, Stack, StackProps, Tag, Tags } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { AWSResourceType } from './resource-types';
 import { Construct } from 'constructs';
 
 class MockStack extends Stack {
-    readonly budgetStrategy: AccountBudgetStrategy;
+    readonly budgetStrategy: AccountCostMonitoring;
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        this.budgetStrategy = new AccountBudgetStrategy(this, {
-            monthlyBudgetInDollars: 100,
+        this.budgetStrategy = new AccountCostMonitoring(this, {
+            monthlyLimitInDollars: 100,
             defaultTopic: 'mocked-topic',
             subscribers: [
                 'alert@example.com',
@@ -19,13 +19,13 @@ class MockStack extends Stack {
             ]
         });
 
-        this.budgetStrategy.createAlerts();
+        this.budgetStrategy.createBudgets();
     }
 }
 
 describe('An ApplicationBudgetStrategy', () => {
     let subject: Template;
-    let budgetStrategy: AccountBudgetStrategy;
+    let budgetStrategy: AccountCostMonitoring;
 
     beforeAll(() => {
         const mockApp = new App();
@@ -60,14 +60,14 @@ describe('An ApplicationBudgetStrategy', () => {
     });
 
     it('should calculates daily budget by rounding down monthly budget/30', () => {
-        expect(budgetStrategy.dailyBudget).toEqual(3);
+        expect(budgetStrategy.dailyLimit).toEqual(3);
     });
 
     it('should calculates quarterly budget equal to six months', () => {
-        expect(budgetStrategy.quarterlyBudget).toEqual(300);
+        expect(budgetStrategy.quarterlyLimit).toEqual(300);
     });
 
     it('should calculates yearly budget equal to 365 day', () => {
-        expect(budgetStrategy.yearlyBudget).toEqual(1095);
+        expect(budgetStrategy.yearlyLimit).toEqual(1095);
     });
 })

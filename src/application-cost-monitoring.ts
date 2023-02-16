@@ -4,82 +4,81 @@ import { BudgetStrategyProps, IBudgetStrategy } from "./budget-strategy";
 import { TimeUnit } from "./utils";
 import { aws_budgets as budgets } from 'aws-cdk-lib';
 
-export interface ApplicationBudgetStrategyProps extends BudgetStrategyProps {
+export interface ApplicationCostMonitoringProps extends BudgetStrategyProps {
   applicationName: string;
   otherStacksIncludedInBudget?: Stack[];
 }
 
-export class ApplicationBudgetStrategy extends IBudgetStrategy {
+export class ApplicationCostMonitoring extends IBudgetStrategy {
   readonly applicationName: string;
   private otherStacks: Stack[];
 
   /**
-   * Default Application BudgetStrategy class that implements daily and monthly alerts.
+   * Default Application CostMonitoring class that implements daily and monthly budgets.
    * 
    * @param stack - default stack to track its resources and it will be used to define Budget resources in it.
    * @param props.applicationName - the name of application to label resources with it.
    * @param props.otherStacksIncludedInBudget - optional other stack to track their resources alog with the default stack.
-   * @param props.monthlyBudget - montly budget in US Dollors.
+   * @param props.monthlyLimitInDollars - montly limit in US Dollors.
    * @param props.defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
-   * @param props.subscribers - list of email address that the BudgetStrategy will use to send alerts to.
+   * @param props.subscribers - list of email address that the CostMonitoring will use to send alerts to.
    * 
    * @example tracking budget for an application called `my-application`:
    * ```
    * const app = new cdk.App();
    * const firstStack = new FirstStack(app, 'FirstStack', {});
    * const secondStack = new SecondStack(app, 'SecondStack', {});
-   * const budgetStratgy = new DefaultApplicationBudgetStrategy(firstStack, {
+   * const costMonitoring = new ApplicationCostMonitoring(firstStack, {
    *   applicationName: 'my-application',
-   *   monthlyBudget: 200,
+   *   monthlyLimitInDollars : 200,
    *  // Optional (you can add as many stack as you want)
    *   otherStacksToMonitor: [
    *     secondStack
    *   ],
    *   subscribers: [
-   *     'internal-service-notif-aaaaht4ubhydfc344peefwt6ye@datachef-engineering.slack.com',
    *     'alert@example.com'
    *   ]
    * });
    * 
-   * budgetStratgy.createBudgets();
+   * budgetStratgy.monitor();
    * ```
    */
-  constructor(stack: Stack, props: ApplicationBudgetStrategyProps) {
+  constructor(stack: Stack, props: ApplicationCostMonitoringProps) {
     super(stack, props);
     this.applicationName = props.applicationName;
     this.otherStacks = props.otherStacksIncludedInBudget ?? [];
   }
 
-  protected createDailyAlerts(dailyBudget: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void {
-    new Budget(this.stack, `application_${this.applicationName}_daily_${dailyBudget}_%80`, {
+  protected createDailyBudgets(dailyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void {
+    new Budget(this.stack, `application_${this.applicationName}_daily_${dailyLimit}_%80`, {
       tags: [
         { key: this.applicationTagKey, value: this.applicationName },
       ],
-      limit: dailyBudget,
+      limit: dailyLimit,
       subscribers: subscribers,
       alertContdition: {
         period: TimeUnit.DAILY,
         threshold: 80,
       },
     })
-      .clone(`application_${this.applicationName}_daily_${dailyBudget}_%100`, { alertContdition: { threshold: 100 } })
+      .clone(`application_${this.applicationName}_daily_${dailyLimit}_%100`, { alertContdition: { threshold: 100 } })
   }
 
-  protected createMonthlyAlerts(monthlyBudget: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void {
-    new Budget(this.stack, `application_${this.applicationName}_monthly_${monthlyBudget}_%90`, {
+  protected createMonthlyBudgets(monthlyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void {
+    new Budget(this.stack, `application_${this.applicationName}_monthly_${monthlyLimit}_%90`, {
       tags: [
         { key: this.applicationTagKey, value: this.applicationName },
       ],
-      limit: monthlyBudget,
+      limit: monthlyLimit,
       subscribers: subscribers,
       alertContdition: {
         period: TimeUnit.MONTHLY,
         threshold: 90,
       },
     })
-      .clone(`application_${this.applicationName}_monthly_${monthlyBudget}_%95`, { alertContdition: { threshold: 95 } })
-      .clone(`application_${this.applicationName}_monthly_${monthlyBudget}_%98`, { alertContdition: { threshold: 98 } })
-      .clone(`application_${this.applicationName}_monthly_${monthlyBudget}_%99`, { alertContdition: { threshold: 99 } })
+      .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%95`, { alertContdition: { threshold: 95 } })
+      .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%98`, { alertContdition: { threshold: 98 } })
+      .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%99`, { alertContdition: { threshold: 99 } })
   }
 
   private tagAllStacks(): void {
@@ -89,14 +88,17 @@ export class ApplicationBudgetStrategy extends IBudgetStrategy {
   }
 
   /**
-   * Creates all the alarms and budgets and tags all resources with the application's name.
+   * Creates all the alarms, budgets and tags all resources with the application's name.
    */
-  public createBudgets(): void {
+  public monitor(): void {
     this.tagAllStacks();
-    this.createAlerts();
+    this.createBudgets();
   }
 
+  /**
+   * Default key name for application tag.
+   */
   protected get applicationTagKey(): string {
-    return 'bm:application';
+    return 'cm:application';
   }
 }
