@@ -1,5 +1,5 @@
-import { Construct } from 'constructs';
 import { aws_budgets as budgets } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import {
   TimeUnit,
   Optional,
@@ -17,11 +17,11 @@ export interface BudgetProps {
 }
 
 export interface BudgetAlertCondition {
-  period: TimeUnit,
-  comparisonOperator?: ComparisonOperator,
-  notificationType?: NotificationType.ACTUAL
-  threshold: number,
-  thresholdType?: ThresholdType,
+  period: TimeUnit;
+  comparisonOperator?: ComparisonOperator;
+  notificationType?: NotificationType.ACTUAL;
+  threshold: number;
+  thresholdType?: ThresholdType;
 }
 
 type OptionalBudgetAlertCondition = Optional<BudgetAlertCondition>;
@@ -37,10 +37,10 @@ export class Budget extends Construct {
   private readonly scope: Construct;
 
   constructor(scope: Construct, id: string, props: BudgetProps) {
-    super(scope, id)
+    super(scope, id);
 
     if (!Number.isInteger(props.limit) && props.limit > 0) {
-      throw Error('budget limit must be a positive integer.')
+      throw Error('budget limit must be a positive integer.');
     }
 
     new budgets.CfnBudget(this, `${id}_budget`, {
@@ -63,7 +63,7 @@ export class Budget extends Construct {
         },
         subscribers: props.subscribers,
       }],
-    })
+    });
 
     this.scope = scope;
     this.props = props;
@@ -73,7 +73,7 @@ export class Budget extends Construct {
     const _tags: Array<string> = [];
     props.tags?.forEach((tag) => {
       _tags.push(`user:${tag.key}$` + tag.value);
-    })
+    });
 
     const costFilters: any = {};
 
@@ -86,7 +86,7 @@ export class Budget extends Construct {
 
   /**
    * create a copy of the object with the provided changes.
-   * 
+   *
    * @param id - a unique CDK Construct identifier.
    * @param props - you can choose to optionally pass all the initializer parameters of this class as the changes you wish to have on the cloned object.
    * @returns - copy of the object
@@ -106,7 +106,7 @@ export class Budget extends Construct {
         notificationType: props.alertContdition?.notificationType ?? this.props.alertContdition.notificationType,
         threshold: props.alertContdition?.threshold ?? this.props.alertContdition.threshold,
         thresholdType: props.alertContdition?.thresholdType ?? this.props.alertContdition.thresholdType,
-      }
+      },
     });
   }
 }

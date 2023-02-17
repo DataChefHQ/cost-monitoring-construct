@@ -1,7 +1,9 @@
-import { Stack } from 'aws-cdk-lib';
+import {
+  Stack,
+  aws_sns as sns,
+  aws_budgets as budgets,
+} from 'aws-cdk-lib';
 import { Email, SubscriptionType } from './utils';
-import { aws_sns as sns } from 'aws-cdk-lib';
-import { aws_budgets as budgets } from 'aws-cdk-lib';
 
 export interface BudgetStrategyProps {
   monthlyLimitInDollars: number;
@@ -16,7 +18,7 @@ export abstract class IBudgetStrategy {
 
   /**
    * defines the stratcure of a BudgetStategy class.
-   * 
+   *
    * @param construct - use to define it's resources inside it.
    * @param props.monthlyBudget - montly budget in US Dollors.
    * @param props.defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
@@ -54,10 +56,9 @@ export abstract class IBudgetStrategy {
     if (snsSubscriber) {
       return [
         ...this.createEmailSubscribers(),
-        snsSubscriber
+        snsSubscriber,
       ];
-    }
-    else {
+    } else {
       return this.createEmailSubscribers();
     }
   }
@@ -78,7 +79,7 @@ export abstract class IBudgetStrategy {
       return {
         subscriptionType: SubscriptionType.EMAIL,
         address: email,
-      }
+      };
     }) ?? [];
   }
 

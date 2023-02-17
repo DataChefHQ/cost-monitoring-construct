@@ -1,8 +1,11 @@
-import { Stack, Tags } from 'aws-cdk-lib';
-import { Budget } from "./budget";
-import { BudgetStrategyProps, IBudgetStrategy } from "./budget-strategy";
-import { TimeUnit } from "./utils";
-import { aws_budgets as budgets } from 'aws-cdk-lib';
+import {
+  Stack,
+  Tags,
+  aws_budgets as budgets,
+} from 'aws-cdk-lib';
+import { Budget } from './budget';
+import { BudgetStrategyProps, IBudgetStrategy } from './budget-strategy';
+import { TimeUnit } from './utils';
 
 export interface ApplicationCostMonitoringProps extends BudgetStrategyProps {
   applicationName: string;
@@ -15,14 +18,14 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
 
   /**
    * Default Application CostMonitoring class that implements daily and monthly budgets.
-   * 
+   *
    * @param stack - default stack to track its resources and it will be used to define Budget resources in it.
    * @param props.applicationName - the name of application to label resources with it.
    * @param props.otherStacksIncludedInBudget - optional other stack to track their resources alog with the default stack.
    * @param props.monthlyLimitInDollars - montly limit in US Dollors.
    * @param props.defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
    * @param props.subscribers - list of email address that the CostMonitoring will use to send alerts to.
-   * 
+   *
    * @example tracking budget for an application called `my-application`:
    * ```
    * const app = new cdk.App();
@@ -39,7 +42,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    *     'alert@example.com'
    *   ]
    * });
-   * 
+   *
    * budgetStratgy.monitor();
    * ```
    */
@@ -61,7 +64,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
         threshold: 80,
       },
     })
-      .clone(`application_${this.applicationName}_daily_${dailyLimit}_%100`, { alertContdition: { threshold: 100 } })
+      .clone(`application_${this.applicationName}_daily_${dailyLimit}_%100`, { alertContdition: { threshold: 100 } });
   }
 
   protected createMonthlyBudgets(monthlyLimit: number, subscribers: Array<budgets.CfnBudget.SubscriberProperty>): void {
@@ -78,7 +81,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
     })
       .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%95`, { alertContdition: { threshold: 95 } })
       .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%98`, { alertContdition: { threshold: 98 } })
-      .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%99`, { alertContdition: { threshold: 99 } })
+      .clone(`application_${this.applicationName}_monthly_${monthlyLimit}_%99`, { alertContdition: { threshold: 99 } });
   }
 
   private tagAllStacks(): void {
