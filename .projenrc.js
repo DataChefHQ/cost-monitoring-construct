@@ -16,6 +16,24 @@ const project = new awscdk.AwsCdkConstructLibrary({
             noUnusedLocals: false,
         },
     },
+
+    // Artifact config: Python
+    publishToPypi: {
+        distName: 'cost-monitoring-construct',
+        module: 'cost_monitoring_construct',
+    },
+    // Artifact config: C#
+    publishToNuget: {
+        packageId: 'DataChef.CostMonitoringConstruct',
+        dotNetNamespace: 'DataChef.CostMonitoringConstruct',
+    },
+    // Artifact config: Java
+    publishToMaven: {
+        mavenGroupId: 'co.datachef',
+        javaPackage: 'co.datachef.costmonitoringconstruct',
+        mavenArtifactId: 'costmonitoringconstruct',
+    },
+
     // deps: [],        /* Runtime dependencies of this module. */
     // devDeps: [],       /* Build dependencies for this module. */
     // packageName: undefined,  /* The 'name' in package.json. */
