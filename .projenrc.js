@@ -28,11 +28,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
         dotNetNamespace: 'DataChef.CostMonitoringConstruct',
     },
     // Artifact config: Java
-    publishToMaven: {
-        mavenGroupId: 'co.datachef',
-        javaPackage: 'co.datachef.costmonitoringconstruct',
-        mavenArtifactId: 'costmonitoringconstruct',
-    },
+    // publishToMaven: {
+    // mavenGroupId: 'co.datachef',
+    // javaPackage: 'co.datachef.costmonitoringconstruct',
+    // mavenArtifactId: 'costmonitoringconstruct',
+    // },
 
     // deps: [],        /* Runtime dependencies of this module. */
     // devDeps: [],       /* Build dependencies for this module. */
