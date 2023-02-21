@@ -1,4 +1,4 @@
-const { awscdk } = require('projen');
+const {awscdk} = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
     author: 'kiarash kiani',
     authorAddress: 'kiarash@datachef.co',
@@ -7,17 +7,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
     name: 'cost-monitoring-construct',
     keywords: ['cost-explorer', 'monitoring', 'budget', 'alert'],
     defaultReleaseBranch: 'main',
-    repositoryUrl: 'https://github.com/DataChefHQ/cost-monitoring-construct.git',
-    gitignore: [
-        '.vscode',
-    ],
-    description: 'A CDK construct that helps track applications\' costs separately and receive alerts in case of unpredicted resource usage',
-    disableTsconfig: false,
-    tsconfigDev: {
-        compilerOptions: {
-            noUnusedLocals: false,
-        },
-    },
+    repositoryUrl:
+        'https://github.com/DataChefHQ/cost-monitoring-construct.git',
+    gitignore: ['.vscode'],
+    description:
+        "A CDK construct that helps track applications' costs separately and receive alerts in case of unpredicted resource usage",
+    eslint: false,
+    prettier: true,
 
     pullRequestTemplateContents: [
         `<!--- Provide a general summary of your changes in the Title above -->
@@ -44,15 +40,15 @@ const project = new awscdk.AwsCdkConstructLibrary({
     ],
 
     // Artifact config: Python
-    publishToPypi: {
-        distName: 'cost-monitoring-construct',
-        module: 'cost_monitoring_construct',
-    },
-    // Artifact config: C#
-    publishToNuget: {
-        packageId: 'DataChef.CostMonitoringConstruct',
-        dotNetNamespace: 'DataChef.CostMonitoringConstruct',
-    },
+    //   publishToPypi: {
+    //     distName: 'cost-monitoring-construct',
+    //     module: 'cost_monitoring_construct',
+    //   },
+    //   Artifact config: C#
+    //   publishToNuget: {
+    //     packageId: 'DataChef.CostMonitoringConstruct',
+    //     dotNetNamespace: 'DataChef.CostMonitoringConstruct',
+    //   },
     // TODO: adding a Java release.
     // Artifact config: Java
     // publishToMaven: {
@@ -64,7 +60,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     // TODO: adding a Go release.
     // Artifact config: Go
     // publishToGo: {
-    //   moduleName: "https://github.com/DataChefHQ/cost-monitoring-construct",
+    //   moduleName: 'https://github.com/DataChefHQ/cost-monitoring-construct',
     // },
 
     // deps: [],        /* Runtime dependencies of this module. */
@@ -72,12 +68,17 @@ const project = new awscdk.AwsCdkConstructLibrary({
     // packageName: undefined,  /* The 'name' in package.json. */
 });
 
-
-project.eslint.addRules({
-    '@typescript-eslint/indent': [
-        'error',
-        4,
-    ],
+// NOTE: projen has `prettierOptions` option but it does not update the `.prettierrc.json` file.
+project.prettier.addOverride({
+    files: ['*.js', '*.ts'],
+    options: {
+        arrowParens: 'always',
+        bracketSpacing: false,
+        tabWidth: 4,
+        semi: true,
+        singleQuote: true,
+        trailingComma: 'all',
+    },
 });
 
 project.synth();

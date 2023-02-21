@@ -1,8 +1,8 @@
-import { App, Stack, StackProps, Tag, Tags } from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
-import { Construct } from 'constructs';
-import { AWSResourceType } from './resource-types';
-import { AccountCostMonitoring } from '../src';
+import {App, Stack, StackProps} from 'aws-cdk-lib';
+import {Template} from 'aws-cdk-lib/assertions';
+import {Construct} from 'constructs';
+import {AWSResourceType} from './resource-types';
+import {AccountCostMonitoring} from '../src';
 
 class MockStack extends Stack {
     readonly budgetStrategy: AccountCostMonitoring;
@@ -13,9 +13,7 @@ class MockStack extends Stack {
         this.budgetStrategy = new AccountCostMonitoring(this, {
             monthlyLimitInDollars: 100,
             defaultTopic: 'mocked-topic',
-            subscribers: [
-                'alert@example.com',
-            ],
+            subscribers: ['alert@example.com'],
         });
 
         this.budgetStrategy.createBudgets();
