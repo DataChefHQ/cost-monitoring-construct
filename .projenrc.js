@@ -6,7 +6,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     defaultReleaseBranch: 'main',
     name: 'cost-monitoring-construct',
     keywords: ['cost-explorer', 'monitoring', 'budget', 'alert'],
-    defaultReleaseBranch: 'main',
     repositoryUrl:
         'https://github.com/DataChefHQ/cost-monitoring-construct.git',
     gitignore: ['.vscode'],
@@ -14,6 +13,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
         "A CDK construct that helps track applications' costs separately and receive alerts in case of unpredicted resource usage",
     eslint: false,
     prettier: true,
+    docgenFilePath: 'API',
 
     pullRequestTemplateContents: [
         `<!--- Provide a general summary of your changes in the Title above -->
