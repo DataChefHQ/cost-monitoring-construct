@@ -40,27 +40,25 @@ const project = new awscdk.AwsCdkConstructLibrary({
     ],
 
     // Artifact config: Python
-    //   publishToPypi: {
-    //     distName: 'cost-monitoring-construct',
-    //     module: 'cost_monitoring_construct',
-    //   },
-    //   Artifact config: C#
-    //   publishToNuget: {
-    //     packageId: 'DataChef.CostMonitoringConstruct',
-    //     dotNetNamespace: 'DataChef.CostMonitoringConstruct',
-    //   },
+    publishToPypi: {
+        distName: 'cost-monitoring-construct',
+        module: 'cost_monitoring_construct',
+    },
+    // Artifact config: C#
+    publishToNuget: {
+        packageId: 'DataChef.CostMonitoringConstruct',
+        dotNetNamespace: 'DataChef.CostMonitoringConstruct',
+    },
+    // Artifact config: Go
+    publishToGo: {
+        moduleName: 'github.com/DataChefHQ/cost-monitoring-construct',
+    },
     // TODO: adding a Java release.
     // Artifact config: Java
     // publishToMaven: {
     // mavenGroupId: 'co.datachef',
     // javaPackage: 'co.datachef.costmonitoringconstruct',
     // mavenArtifactId: 'costmonitoringconstruct',
-    // },
-
-    // TODO: adding a Go release.
-    // Artifact config: Go
-    // publishToGo: {
-    //   moduleName: 'https://github.com/DataChefHQ/cost-monitoring-construct',
     // },
 
     // deps: [],        /* Runtime dependencies of this module. */
