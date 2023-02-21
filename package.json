@@ -29,8 +29,8 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "kiarash kiani",
-    "email": "kiarash@datachef.co",
+    "name": "Kiarash Kiani",
+    "url": "Kiarash@DataChef.co",
     "organization": false
   },
   "devDependencies": {
