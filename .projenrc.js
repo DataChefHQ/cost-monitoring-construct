@@ -29,11 +29,18 @@ const project = new awscdk.AwsCdkConstructLibrary({
         packageId: 'DataChef.CostMonitoringConstruct',
         dotNetNamespace: 'DataChef.CostMonitoringConstruct',
     },
+    // TODO: adding a Java release.
     // Artifact config: Java
     // publishToMaven: {
     // mavenGroupId: 'co.datachef',
     // javaPackage: 'co.datachef.costmonitoringconstruct',
     // mavenArtifactId: 'costmonitoringconstruct',
+    // },
+
+    // TODO: adding a Go release.
+    // Artifact config: Go
+    // publishToGo: {
+    //   moduleName: "https://github.com/DataChefHQ/cost-monitoring-construct",
     // },
 
     // deps: [],        /* Runtime dependencies of this module. */
