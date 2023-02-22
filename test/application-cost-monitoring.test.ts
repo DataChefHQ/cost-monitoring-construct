@@ -1,13 +1,13 @@
-import { ApplicationCostMonitoring } from '../src';
 import { App, Stack, Tags } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { AWSResourceType } from './resource-types';
+import { ApplicationCostMonitoring } from '../src';
 
 describe('An ApplicationCostMonitoring', () => {
     let subject: Template;
     let budgetStrategy: ApplicationCostMonitoring;
 
-    beforeAll(() => {
+    beforeEach(() => {
         const mockApp = new App();
         const mockAppFirstStack = new Stack(mockApp, 'mocked-first-stack', {});
         const mockAppSecondStack = new Stack(mockApp, 'mocked-second-stack', {});
@@ -21,11 +21,11 @@ describe('An ApplicationCostMonitoring', () => {
             ],
             subscribers: [
                 'alert@example.com',
-            ]
+            ],
         });
 
         jest.spyOn(Tags, 'of');
-        budgetStrategy.createBudgets();
+        budgetStrategy.monitor();
         subject = Template.fromStack(mockAppFirstStack);
     });
 
@@ -39,11 +39,11 @@ describe('An ApplicationCostMonitoring', () => {
 
     it('should filter resources with `cm:application` tag key', () => {
         subject.hasResourceProperties(AWSResourceType.Budget, {
-            "Budget": {
-                "CostFilters": {
-                    "TagKeyValue": [
-                        "user:cm:application$mock-application"
-                    ]
+            Budget: {
+                CostFilters: {
+                    TagKeyValue: [
+                        'user:cm:application$mock-application',
+                    ],
                 },
             },
         });
@@ -55,18 +55,18 @@ describe('An ApplicationCostMonitoring', () => {
 
     it('should create daily budgets', () => {
         subject.hasResourceProperties(AWSResourceType.Budget, {
-            "Budget": {
-                "TimeUnit": "DAILY"
+            Budget: {
+                TimeUnit: 'DAILY',
             },
-        })
+        });
     });
 
     it('should create monthly budgets', () => {
         subject.hasResourceProperties(AWSResourceType.Budget, {
-            "Budget": {
-                "TimeUnit": "MONTHLY"
+            Budget: {
+                TimeUnit: 'MONTHLY',
             },
-        })
+        });
     });
 
     it('should calculates daily budget by rounding down monthly budget/30', () => {
@@ -81,4 +81,4 @@ describe('An ApplicationCostMonitoring', () => {
         expect(budgetStrategy.yearlyLimit).toEqual(1095);
     });
 
-})
+});
