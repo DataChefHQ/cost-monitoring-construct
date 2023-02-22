@@ -1,5 +1,5 @@
-export { AccountBudgetStrategy } from './account-budget-strategy'
-export { ApplicationBudgetStrategy, ApplicationBudgetStrategyProps } from './application-budget-strategy'
+export { AccountCostMonitoring } from './account-cost-monitoring';
+export { ApplicationCostMonitoring, IApplicationCostMonitoringProps } from './application-cost-monitoring';
 export * from './budget-strategy';
 export * from './budget';
-export * from './utils'
+export * from './utils';
