@@ -53,6 +53,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     // Artifact config: Go
     publishToGo: {
         moduleName: 'github.com/DataChefHQ/cost-monitoring-construct',
+        githubTokenSecret: 'GITHUB_TOKEN',
     },
     // TODO: adding a Java release.
     // Artifact config: Java
