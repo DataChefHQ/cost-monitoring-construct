@@ -6,6 +6,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     defaultReleaseBranch: 'main',
     name: 'cost-monitoring-construct',
     keywords: ['cost-explorer', 'monitoring', 'budget', 'alert'],
+    majorVersion: 1,
     repositoryUrl:
         'https://github.com/DataChefHQ/cost-monitoring-construct.git',
     gitignore: ['.vscode'],
