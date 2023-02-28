@@ -1,22 +1,22 @@
-const {awscdk} = require('projen');
+const { awscdk } = require("projen");
 const project = new awscdk.AwsCdkConstructLibrary({
-    author: 'Kiarash Kiani',
-    authorAddress: 'Kiarash@DataChef.co',
-    cdkVersion: '2.1.0',
-    defaultReleaseBranch: 'main',
-    name: 'cost-monitoring-construct',
-    keywords: ['cost-explorer', 'monitoring', 'budget', 'alert'],
-    repositoryUrl:
-        'https://github.com/DataChefHQ/cost-monitoring-construct.git',
-    gitignore: ['.vscode'],
-    description:
-        "A CDK construct that helps track applications' costs separately and receive alerts in case of unpredicted resource usage",
-    eslint: false,
-    prettier: true,
-    docgenFilePath: 'API',
+  author: "Kiarash Kiani",
+  authorAddress: "Kiarash@DataChef.co",
+  cdkVersion: "2.1.0",
+  defaultReleaseBranch: "main",
+  name: "cost-monitoring-construct",
+  keywords: ["cost-explorer", "monitoring", "budget", "alert"],
+  majorVersion: 1,
+  repositoryUrl: "https://github.com/DataChefHQ/cost-monitoring-construct.git",
+  gitignore: [".vscode"],
+  description:
+    "A CDK construct that helps track applications' costs separately and receive alerts in case of unpredicted resource usage",
+  eslint: false,
+  prettier: true,
+  docgenFilePath: "API",
 
-    pullRequestTemplateContents: [
-        `<!--- Provide a general summary of your changes in the Title above -->
+  pullRequestTemplateContents: [
+    `<!--- Provide a general summary of your changes in the Title above -->
 
         ## Description
         <!--- Describe your changes in detail -->
@@ -37,46 +37,34 @@ const project = new awscdk.AwsCdkConstructLibrary({
         <!--- see how your change affects other areas of the code, etc. -->
         
         ## Screenshots (if appropriate):`,
-    ],
+  ],
 
-    // Artifact config: Python
-    publishToPypi: {
-        distName: 'cost-monitoring-construct',
-        module: 'cost_monitoring_construct',
-    },
-    // Artifact config: C#
-    publishToNuget: {
-        packageId: 'DataChef.CostMonitoringConstruct',
-        dotNetNamespace: 'DataChef.CostMonitoringConstruct',
-    },
-    // Artifact config: Go
-    publishToGo: {
-        moduleName: 'github.com/DataChefHQ/cost-monitoring-construct',
-    },
-    // TODO: adding a Java release.
-    // Artifact config: Java
-    // publishToMaven: {
-    // mavenGroupId: 'co.datachef',
-    // javaPackage: 'co.datachef.costmonitoringconstruct',
-    // mavenArtifactId: 'costmonitoringconstruct',
-    // },
+  // Artifact config: Python
+  publishToPypi: {
+    distName: "cost-monitoring-construct",
+    module: "cost_monitoring_construct",
+  },
+  // Artifact config: C#
+  publishToNuget: {
+    packageId: "DataChef.CostMonitoringConstruct",
+    dotNetNamespace: "DataChef.CostMonitoringConstruct",
+  },
+  // Artifact config: Go
+  publishToGo: {
+    moduleName: "github.com/DataChefHQ/cost-monitoring-construct",
+    githubTokenSecret: "GITHUB_TOKEN",
+  },
+  // TODO: adding a Java release.
+  // Artifact config: Java
+  // publishToMaven: {
+  // mavenGroupId: 'co.datachef',
+  // javaPackage: 'co.datachef.costmonitoringconstruct',
+  // mavenArtifactId: 'costmonitoringconstruct',
+  // },
 
-    // deps: [],        /* Runtime dependencies of this module. */
-    // devDeps: [],       /* Build dependencies for this module. */
-    // packageName: undefined,  /* The 'name' in package.json. */
-});
-
-// NOTE: projen has `prettierOptions` option but it does not update the `.prettierrc.json` file.
-project.prettier.addOverride({
-    files: ['*.js', '*.ts'],
-    options: {
-        arrowParens: 'always',
-        bracketSpacing: false,
-        tabWidth: 4,
-        semi: true,
-        singleQuote: true,
-        trailingComma: 'all',
-    },
+  // deps: [],        /* Runtime dependencies of this module. */
+  // devDeps: [],       /* Build dependencies for this module. */
+  // packageName: undefined,  /* The 'name' in package.json. */
 });
 
 project.synth();
