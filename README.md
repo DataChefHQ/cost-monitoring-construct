@@ -16,7 +16,6 @@ Cost Monitoring Construct provides the following features:
 
 - **Cost dashboard:** Displays your current costs and usage, broken down by application's name, region, and etc. Allows you to see how much you are spending on each application and where you might be able to reduce costs.
 - **Budgets:** Allows you to set budgets for each applications. It will automatically set up alerts to notify you when your actual costs exceed your budgeted costs. It also continues to track the cost and sending alert if an application continues to cost drastically.
-- **Reports:** Provides detailed reports on your application's cloud infrastructure usage and costs, broken down by service, region, and etc. You can use this information to identify areas where you can optimize usage and reduce costs per application.
 - **Integration:** Integrates with various tools and monitoring services, such as AWS Cost Explorer and Datadog.
 
 # What is it useful for?
