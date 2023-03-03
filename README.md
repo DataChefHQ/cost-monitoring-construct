@@ -28,7 +28,7 @@ Cost Monitoring Construct is useful for anyone who uses AWS and wants to keep th
 
 # What is this _not_ useful for?
 
-Cost Monitoring Construct is not a tool for optimizing your cloud infrastructure usage. While it can help you to identify areas where you can reduce costs, it is up to you to make the necessary changes to your infrastructure.
+The Cost Monitoring Construct is not a magical tool that can solve all of your cloud cost problems. In spite of the fact that it can bring clarity and help you to identify areas where you can reduce costs, you must make the necessary decisions about your infrastructure on your own.
 
 # Which programming languages Cost Monitoring Construct supports?
 
