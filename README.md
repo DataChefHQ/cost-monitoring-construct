@@ -1,80 +1,46 @@
-# Introduction
+# What is Cost Monitoring Construct?
 
-Cost Monitoring Construct is a typescript CDK construct that helps track applications' costs separately and receive alerts in case of unpredicted resource usage to prevent surprise billings and have a better overview of resource usage by an application.
+Cost Monitoring Construct is a CDK library that helps monitor costs for AWS cloud infrastructure resources, such as virtual machines, storage, and network traffic. It allows you to set budgets and alerts to ensure that you don't overspend on your cloud resources.
 
-# Usage
+With the Cost Monitoring Construct, you can share the responsibility of cost management between developers and business holders. This is achieved through the creation of meaningful reports that enable the business team to make informed decisions. Additionally, the Construct generates boilerplate code that can be used to apply these decisions in practice, making it easier to stay on top of your budget.
 
-The easiest way to apply cost monitoring is by using predefined default budget strategies. The `ApplicationCostMonitoring` has default strategy implementation for monitoring budgets per CDK applications, while the `AccountCostMonitoring` has default strategy implementation for monitoring budgets per account. You can also create your own strategy by creating a class that applies to the `IBudgetStrategy` or directly inherits from the `ApplicationCostMonitoring` or `AccountCostMonitoring` class to customize them to your needs.
+# Why do you need it?
 
-## `ApplicationCostMonitoring` Class
+Cloud services can get very expensive, very quickly, especially if you are not careful with your usage. Cost Monitoring Construct helps you to keep an eye on your cloud infrastructure costs so that you can stay within budget. By setting budgets and defining alert strategies, you can take proactive steps to reduce costs before they become a problem.
 
-This is the default strategy for monitoring CDK applications. You have to provide at least one stack by the first parameter of the initializer. If you wish to monitor more stacks, you can pass them as a list to the `otherStacksIncludedInBudget` prop.
+# How does Cost Monitoring Construct work?
 
-The `ApplicationCostMonitoring` will always use the first stack (the first parameter of the initializer) to inject its resources into it. You can create a separate stack and pass it as the first stack if you wish to keep cost monitoring separate from your stacks. The cost monitoring class will monitor both the first stack and stacks from `otherStacksIncludedInBudget`.
+Cost Monitoring Construct uses AWS Tagging practice to track resources related to an specific application, creates proper alert with respect to the defined budget limit and provide overview dashbords. The tool is highly customizable and allows you to customize it to your budgeting strategy based on your specific needs.
 
-⚠️ **Important Note**: ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must activate the `cm:application` tag key under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
+Cost Monitoring Construct provides the following features:
 
-The example below shows how to use `ApplicationCostMonitoring` to track your application in CDK code:
+- **Cost dashboard:** Displays your current costs and usage, broken down by application's name, region, and etc. Allows you to see how much you are spending on each application and where you might be able to reduce costs.
+- **Budgets:** Allows you to set budgets for each applications. It will automatically set up alerts to notify you when your actual costs exceed your budgeted costs. It also continues to track the cost and sending alert if an application continues to cost drastically.
+- **Integration:** Integrates with various tools and monitoring services, such as AWS Cost Explorer and Datadog.
 
-```typescript
-const app = new cdk.App();
-// Holding resources for monitoring the application. Plus to be used by costMonitoring to inject its resources into it.
-const monitoringStack = new MonitoringStack(app, "MyAppMonitoringStack", {});
-const firstStack = new FirstStack(app, "FirstStack", {});
-const secondStack = new SecondStack(app, "SecondStack", {});
-const costMonitoring = new ApplicationCostMonitoring(monitoringStack, {
-  //                                the fitst stack ~~~~~~~^~~~~~~
-  applicationName: "my-application",
-  monthlyBudget: 200, // Optional (you can add as many stack as you want)
-  otherStacksIncludedInBudget: [secondStack, firstStack],
-  subscribers: ["alert@example.com"],
-});
+# What is it useful for?
 
-costMonitoring.monitor();
-```
+Cost Monitoring Construct is useful for anyone who uses AWS and wants to keep their costs under control. It is particularly useful for:
 
-## `IBudgetStrategy` Abstract Class
+- **Startups and small businesses:** Cost Monitoring Construct can help startups and small businesses to keep their costs under control during the early stages of growth.
+- **Large enterprises:** Cost Monitoring Construct can help large enterprises to optimize their cloud usage and reduce costs across multiple teams and departments.
+- **Developers:** Cost Monitoring Construct can help developers to track their usage and costs across multiple projects and services.
 
-This is the abstract base class that all budget strategies must apply to. This Abstract class enforces the implementation for `createDailyBudgets` and `createMonthlyBudgets`. Plus, it provides the `createQuarterlyBudgets` and `createYearlyBudgets` optional to implement.
+# What is this _not_ useful for?
 
-The methods above abstract the implementations of budgeting strategy from boilerplate codes.
+The Cost Monitoring Construct is not a magical tool that can solve all of your cloud cost problems. In spite of the fact that it can bring clarity and help you to identify areas where you can reduce costs, you must make the necessary decisions about your infrastructure on your own.
 
-To implement those methods, you can instantiate from class `Budget` to define your budgets according to their period. The class `Budget` provides the `clone` method to deep copy objects with small changes instead of providing duplicate configs for multiple `Budget` instantiations.
+# Which programming languages Cost Monitoring Construct supports?
 
-The example below implements the `createDailyBudgets` method with that pattern for a custom budget strategy
+Cost Monitoring Construct has been developed using JSII technolgy to provide interfaces for different modern programming languages. Currently, it supports the following languages:
 
-```typescript
-export class MyApplicationCostMonitoring extends IBudgetStrategy {
-  protected createDailyBudgets(
-    dailyLimit: number,
-    subscribers: Array<budgets.CfnBudget.SubscriberProperty>
-  ): void {
-    new Budget(
-      this.stack,
-      `application_${this.applicationName}_daily_${dailyBudget}_%80`,
-      {
-        tags: [{ key: "application", value: "my-application" }],
-        limit: dailyLimit,
-        subscribers: subscribers,
-        alertContdition: {
-          threshold: 80,
-          period: TimeUnit.DAILY,
-        },
-      }
-    )
-      .clone(`application_${this.applicationName}_daily_${dailyLimit}_%90`, {
-        threshold: 90,
-      })
-      .clone(`application_${this.applicationName}_daily_${dailyLimit}_%100`, {
-        threshold: 100,
-      });
-  }
+- TypeScript
+- JavaScript
+- Python
+- .NET
 
-  protected createMonthlyBudgets(
-    monthlyLimit: number,
-    subscribers: Array<budgets.CfnBudget.SubscriberProperty>
-  ): void {
-    // defining monthly strategy here ...
-  } // optionally you can define Yearly and Quarterly Budgets as well.
-}
-```
+> **✏️ Note**
+>
+> Java and Go will be supported soon but for now you can build it from the source.
+
+If you have any questions or need help with Cost Monitoring Construct, you can reach out to our support team at [support@datacef.co](mailto:support@datachef.co).
