@@ -43,4 +43,4 @@ Cost Monitoring Construct has been developed using JSII technolgy to provide int
 >
 > Java and Go will be supported soon but for now you can build it from the source.
 
-If you have any questions or need help with Cost Monitoring Construct, you can reach out to our support team at [support@datacef.co](mailto:support@datachef.co).
+If you have any questions or need help with Cost Monitoring Construct, you can reach out to our support team at [support@datachef.co](mailto:support@datachef.co).
