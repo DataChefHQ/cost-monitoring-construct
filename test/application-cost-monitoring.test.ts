@@ -25,6 +25,20 @@ describe("An ApplicationCostMonitoring", () => {
     subject = Template.fromStack(mockAppFirstStack);
   });
 
+  it("should throw range error if the monthly budget is less than $30", () => {
+    const mockApp = new App();
+    const mockAppFirstStack = new Stack(mockApp, "mocked-first-stack", {});
+
+    expect(() => {
+      new ApplicationCostMonitoring(mockAppFirstStack, {
+        applicationName: "mock-application",
+        monthlyLimitInDollars: 29,
+        defaultTopic: "mocked-topic",
+        subscribers: ["alert@example.com"],
+      });
+    }).toThrow(RangeError);
+  });
+
   it("should creates multiple aws budgets", () => {
     subject.resourceCountIs(AWSResourceType.Budget, 6);
   });

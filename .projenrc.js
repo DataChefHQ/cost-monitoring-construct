@@ -50,11 +50,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
     dotNetNamespace: "DataChef.CostMonitoringConstruct",
   },
   // Artifact config: Java
-  // publishToMaven: {
-  // mavenGroupId: 'co.datachef',
-  // javaPackage: 'co.datachef.costmonitoringconstruct',
-  // mavenArtifactId: 'costmonitoringconstruct',
-  // },
+  publishToMaven: {
+    javaPackage: "co.datachef.costmonitoringconstruct",
+    mavenArtifactId: "costmonitoringconstruct",
+    mavenGroupId: "co.datachef",
+    mavenEndpoint: "https://s01.oss.sonatype.org/",
+  },
   // TODO: add support for Go release.
   // Artifact config: Go
   //   publishToGo: {
