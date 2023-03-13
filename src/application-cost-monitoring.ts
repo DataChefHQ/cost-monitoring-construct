@@ -43,6 +43,13 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    */
   constructor(stack: Stack, props: IApplicationCostMonitoringProps) {
     super(stack, props);
+
+    if (props.monthlyLimitInDollars < 30) {
+      throw RangeError(
+        "monthlyLimitInDollars must be greater than equal to 30."
+      );
+    }
+
     this.applicationName = props.applicationName;
     this.otherStacks = props.otherStacksIncludedInBudget ?? [];
   }
