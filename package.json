@@ -32,9 +32,9 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "Kiarash Kiani",
-    "url": "Kiarash@DataChef.co",
-    "organization": false
+    "name": "DataChef",
+    "email": "support@datachef.co",
+    "organization": true
   },
   "devDependencies": {
     "@types/jest": "^27",

@@ -2,6 +2,7 @@ const { awscdk } = require("projen");
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "DataChef",
   authorAddress: "support@datachef.co",
+  authorOrganization: true,
   cdkVersion: "2.1.0",
   defaultReleaseBranch: "main",
   name: "cost-monitoring-construct",
