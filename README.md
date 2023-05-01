@@ -40,11 +40,11 @@ The Cost Monitoring Construct is not a magical tool that can solve all of your c
 
 Cost Monitoring Construct has been developed using JSII technolgy to provide interfaces for different modern programming languages. Currently, it supports the following languages:
 
-- TypeScript
-- JavaScript
-- Python
-- .NET
-- Java
+- [TypeScript](https://www.npmjs.com/package/cost-monitoring-construct)
+- [JavaScript](https://www.npmjs.com/package/cost-monitoring-construct)
+- [Python](https://pypi.org/project/cost-monitoring-construct/)
+- [.NET](https://www.nuget.org/packages/DataChef.CostMonitoringConstruct)
+- [Java](https://central.sonatype.com/artifact/co.datachef/costmonitoringconstruct/1.1.0/versions)
 
 > **✏️ Note**
 >
