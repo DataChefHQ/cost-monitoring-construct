@@ -2,6 +2,12 @@
 
 Cost Monitoring Construct is a typescript CDK construct that helps track applications' costs separately and receive alerts in case of unpredicted resource usage to prevent surprise billings and have a better overview of resource usage by an application.
 
+To install the Cost Monitoring Construct package, run the following command to download it from npm:
+
+```bash
+npm i cost-monitoring-construct
+```
+
 # Usage
 
 The easiest way to apply cost monitoring is by using predefined default budget strategies. The `ApplicationCostMonitoring` has default strategy implementation for monitoring budgets per CDK applications, while the `AccountCostMonitoring` has default strategy implementation for monitoring budgets per account. You can also create your own strategy by creating a class that applies to the `IBudgetStrategy` or directly inherits from the `ApplicationCostMonitoring` or `AccountCostMonitoring` class to customize them to your needs.
