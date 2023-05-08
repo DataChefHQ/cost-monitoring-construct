@@ -8,7 +8,7 @@ With the Cost Monitoring Construct, you can share the responsibility of cost man
 
 To use Cost Monitoring Construct, all you need is to have the AWS CDK installed and set up. Once you have that, you can install the package from the repository of your choice.
 
-For more information on using this Construct in TypeScript checkout the [TypeScript documentation](docs/typescript.md).
+For more information on using this Construct in TypeScript checkout the [TypeScript documentation](docs/typescript.md). You can also check the typescript example from [sample folder](https://github.com/DataChefHQ/cost-monitoring-construct/tree/main/sample) on the GitHub repository.
 
 # Why do you need it?
 
