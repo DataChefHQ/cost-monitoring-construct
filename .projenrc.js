@@ -1,4 +1,5 @@
 const { awscdk } = require("projen");
+const { GithubCredentials } = require("projen/lib/github");
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "DataChef",
   authorAddress: "support@datachef.co",
@@ -15,6 +16,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   eslint: false,
   prettier: true,
   docgenFilePath: "API",
+  projenCredentials: GithubCredentials.fromPersonalAccessToken({
+    secret: "GITHUB_TOKEN",
+  }),
 
   pullRequestTemplateContents: [
     `<!--- Provide a general summary of your changes in the Title above -->
