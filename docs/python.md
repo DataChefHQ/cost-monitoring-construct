@@ -80,3 +80,8 @@ cost_monitoring = ApplicationCostMonitoring(
     )
 )
 ```
+
+## Sources and additional info
+
+- <https://aws.github.io/jsii/user-guides/lib-user/language-specific/python/>
+- <https://github.com/aws/jsii/issues/1027>
