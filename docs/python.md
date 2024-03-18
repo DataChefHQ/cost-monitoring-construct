@@ -4,10 +4,9 @@
 > The following is valid as of 2024-03-18. Future versions of `jsii` might provide a more Pythonic approach.
 
 Using the python version of this package requires some extra steps to ensure everything works as expected.
-
 This document highlights only those steps, so for the basics, please refer to the [main README](../README.md), the [API docs](../API.md) and the [Typescript docs](typescript.md).
 
-## How to implement `IApplicationCostMonitoringProps` (or any other IInterface with `jsii`)
+## How to implement interfaces
 
 Since this package is written in Typescript and then exported to Python via `jsii`, using interfaces to pass props is not as straightforward as it should be.
 
