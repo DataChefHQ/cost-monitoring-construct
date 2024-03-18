@@ -18,7 +18,7 @@ const costMonitoring = new ApplicationCostMonitoring(
     // ⬇︎⬇︎⬇︎ The props ⬇︎⬇︎⬇︎
     {
         applicationName: "my-application",
-        monthlyBudget: 200,want)
+        monthlyBudget: 200,
         otherStacksIncludedInBudget: [secondStack, firstStack],
         subscribers: ["alert@example.com"],
     }
