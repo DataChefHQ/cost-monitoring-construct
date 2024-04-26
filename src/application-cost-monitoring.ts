@@ -8,6 +8,16 @@ export interface IApplicationCostMonitoringProps extends IBudgetStrategyProps {
   otherStacksIncludedInBudget?: Stack[];
 }
 
+export class ApplicationCostMonitoringProps implements IApplicationCostMonitoringProps {
+  constructor(
+    public applicationName: string,
+    public monthlyLimitInDollars: number,
+    public otherStacksIncludedInBudget?: Stack[],
+    public defaultTopic?: string,
+    public subscribers?: string[]
+  ) {}
+}
+
 export class ApplicationCostMonitoring extends IBudgetStrategy {
   readonly applicationName: string;
   private otherStacks: Stack[];
@@ -41,7 +51,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * budgetStratgy.monitor();
    *
    */
-  constructor(stack: Stack, props: IApplicationCostMonitoringProps) {
+  constructor(stack: Stack, props: ApplicationCostMonitoringProps) {
     super(stack, props);
 
     if (props.monthlyLimitInDollars < 30) {
