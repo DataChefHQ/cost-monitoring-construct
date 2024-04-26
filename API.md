@@ -454,7 +454,7 @@ public readonly applicationName: string;
 ```typescript
 import { ApplicationCostMonitoringProps } from 'cost-monitoring-construct'
 
-new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollars: number, otherStacksIncludedInBudget?: Stack[], defaultTopic?: string, subscribers?: string[])
+new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollars: number, otherStacksIncludedInBudget?: Stack[], defaultTopic?: string, subscribers?: string[], costAllocationTag?: string)
 ```
 
 | **Name** | **Type** | **Description** |
@@ -464,6 +464,7 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -497,6 +498,12 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 
 ---
 
+##### `costAllocationTag`<sup>Optional</sup> <a name="costAllocationTag" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag"></a>
+
+- *Type:* string
+
+---
+
 
 
 #### Properties <a name="Properties" id="Properties"></a>
@@ -505,6 +512,7 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 | --- | --- | --- |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.applicationName">applicationName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
@@ -528,6 +536,16 @@ public readonly monthlyLimitInDollars: number;
 ```
 
 - *Type:* number
+
+---
+
+##### `costAllocationTag`<sup>Optional</sup> <a name="costAllocationTag" id="cost-monitoring-construct.ApplicationCostMonitoringProps.property.costAllocationTag"></a>
+
+```typescript
+public readonly costAllocationTag: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -700,6 +718,7 @@ Return default SNS topic only if the defultTopic prop has been passed when insta
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.applicationName">applicationName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | *No description.* |
 
 ---
@@ -738,6 +757,16 @@ public readonly subscribers: string[];
 
 ```typescript
 public readonly applicationName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `costAllocationTag`<sup>Optional</sup> <a name="costAllocationTag" id="cost-monitoring-construct.IApplicationCostMonitoringProps.property.costAllocationTag"></a>
+
+```typescript
+public readonly costAllocationTag: string;
 ```
 
 - *Type:* string

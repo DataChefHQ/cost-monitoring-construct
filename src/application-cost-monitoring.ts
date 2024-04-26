@@ -6,6 +6,7 @@ import { TimeUnit } from "./utils";
 export interface IApplicationCostMonitoringProps extends IBudgetStrategyProps {
   applicationName: string;
   otherStacksIncludedInBudget?: Stack[];
+  costAllocationTag?: string;
 }
 
 export class ApplicationCostMonitoringProps implements IApplicationCostMonitoringProps {
@@ -14,13 +15,15 @@ export class ApplicationCostMonitoringProps implements IApplicationCostMonitorin
     public monthlyLimitInDollars: number,
     public otherStacksIncludedInBudget?: Stack[],
     public defaultTopic?: string,
-    public subscribers?: string[]
+    public subscribers?: string[],
+    public costAllocationTag?: string
   ) {}
 }
 
 export class ApplicationCostMonitoring extends IBudgetStrategy {
   readonly applicationName: string;
   private otherStacks: Stack[];
+  private costAllocationTag?: string
 
   /**
    * Default Application CostMonitoring class that implements daily and monthly budgets.
@@ -31,6 +34,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * @param props.monthlyLimitInDollars - montly limit in US Dollors.
    * @param props.defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
    * @param props.subscribers - list of email address that the CostMonitoring will use to send alerts to.
+   * @param props.costAllocationTag - Tag key used to track resources' expenditure. Only if provided, it will be used to tag the application resources.
    *
    * @example tracking budget for an application called `my-application`:
    * const app = new cdk.App();
@@ -62,6 +66,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
 
     this.applicationName = props.applicationName;
     this.otherStacks = props.otherStacksIncludedInBudget ?? [];
+    this.costAllocationTag = props.costAllocationTag;
   }
 
   protected createDailyBudgets(
@@ -143,6 +148,6 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * Default key name for application tag.
    */
   protected get applicationTagKey(): string {
-    return "cm:application";
+    return this.costAllocationTag || "cm:application";
   }
 }
