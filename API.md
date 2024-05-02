@@ -4,17 +4,17 @@ Cost Monitoring Construct is a CDK library that helps monitor costs for AWS clou
 
 With the Cost Monitoring Construct, you can share the responsibility of cost management between developers and business holders. This is achieved through the creation of meaningful reports that enable the business team to make informed decisions. Additionally, the Construct generates boilerplate code that can be used to apply these decisions in practice, making it easier to stay on top of your budget.
 
-# How to use Cost Monitoring Construct?
+## How to use Cost Monitoring Construct?
 
 To use Cost Monitoring Construct, all you need is to have the AWS CDK installed and set up. Once you have that, you can install the package from the repository of your choice.
 
 For more information on using this Construct in TypeScript checkout the [TypeScript documentation](docs/typescript.md). You can also check the typescript example from [sample folder](https://github.com/DataChefHQ/cost-monitoring-construct/tree/main/sample) on the GitHub repository.
 
-# Why do you need it?
+## Why do you need it?
 
 Cloud services can get very expensive, very quickly, especially if you are not careful with your usage. Cost Monitoring Construct helps you to keep an eye on your cloud infrastructure costs so that you can stay within budget. By setting budgets and defining alert strategies, you can take proactive steps to reduce costs before they become a problem.
 
-# How does Cost Monitoring Construct work?
+## How does Cost Monitoring Construct work?
 
 Cost Monitoring Construct uses AWS Tagging practice to track resources related to an specific application, creates proper alert with respect to the defined budget limit and provide overview dashbords. The tool is highly customizable and allows you to customize it to your budgeting strategy based on your specific needs.
 
@@ -24,7 +24,10 @@ Cost Monitoring Construct provides the following features:
 - **Budgets:** Allows you to set budgets for each applications. It will automatically set up alerts to notify you when your actual costs exceed your budgeted costs. It also continues to track the cost and sending alert if an application continues to cost drastically.
 - **Integration:** Integrates with various tools and monitoring services, such as AWS Cost Explorer and Datadog.
 
-# What is it useful for?
+> [!WARNING]
+> Tags used to create and monitor budgets must first be [activated as cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html). Ensure your chosen one is activated, otherwise the budgets won't work!
+
+## What is it useful for?
 
 Cost Monitoring Construct is useful for anyone who uses AWS and wants to keep their costs under control. It is particularly useful for:
 
@@ -32,11 +35,11 @@ Cost Monitoring Construct is useful for anyone who uses AWS and wants to keep th
 - **Large enterprises:** Cost Monitoring Construct can help large enterprises to optimize their cloud usage and reduce costs across multiple teams and departments.
 - **Developers:** Cost Monitoring Construct can help developers to track their usage and costs across multiple projects and services.
 
-# What is this _not_ useful for?
+## What is this _not_ useful for?
 
 The Cost Monitoring Construct is not a magical tool that can solve all of your cloud cost problems. In spite of the fact that it can bring clarity and help you to identify areas where you can reduce costs, you must make the necessary decisions about your infrastructure on your own.
 
-# Which programming languages Cost Monitoring Construct supports?
+## Which programming languages Cost Monitoring Construct supports?
 
 Cost Monitoring Construct has been developed using JSII technolgy to provide interfaces for different modern programming languages. Currently, it supports the following languages:
 
@@ -46,8 +49,7 @@ Cost Monitoring Construct has been developed using JSII technolgy to provide int
 - [.NET](https://www.nuget.org/packages/DataChef.CostMonitoringConstruct)
 - [Java](https://central.sonatype.com/artifact/co.datachef/costmonitoringconstruct/1.1.0/versions)
 
-> **✏️ Note**
->
+> [!NOTE]
 > Go will be supported soon but for now you can build it from the source.
 
 If you have any questions or need help with Cost Monitoring Construct, you can reach out to our support team at [support@datachef.co](mailto:support@datachef.co).
@@ -459,12 +461,12 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.applicationName">applicationName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.applicationName">applicationName</a></code> | <code>string</code> | - the name of application to label resources with it. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | - montly limit in US Dollors. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | - optional other stack to track their resources alog with the default stack. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.defaultTopic">defaultTopic</a></code> | <code>string</code> | - default SNS topic name. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers">subscribers</a></code> | <code>string[]</code> | - list of email address that the CostMonitoring will use to send alerts to. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | - Tag key used to track resources' expenditure. |
 
 ---
 
@@ -472,11 +474,15 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 
 - *Type:* string
 
+the name of application to label resources with it.
+
 ---
 
 ##### `monthlyLimitInDollars`<sup>Required</sup> <a name="monthlyLimitInDollars" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.monthlyLimitInDollars"></a>
 
 - *Type:* number
+
+montly limit in US Dollors.
 
 ---
 
@@ -484,11 +490,17 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 
 - *Type:* aws-cdk-lib.Stack[]
 
+optional other stack to track their resources alog with the default stack.
+
 ---
 
 ##### `defaultTopic`<sup>Optional</sup> <a name="defaultTopic" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.defaultTopic"></a>
 
 - *Type:* string
+
+default SNS topic name.
+
+Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
 
 ---
 
@@ -496,11 +508,17 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 
 - *Type:* string[]
 
+list of email address that the CostMonitoring will use to send alerts to.
+
 ---
 
 ##### `costAllocationTag`<sup>Optional</sup> <a name="costAllocationTag" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag"></a>
 
 - *Type:* string
+
+Tag key used to track resources' expenditure.
+
+Only if provided, it will be used to tag the application resources. Defaults to `cm:application`
 
 ---
 
@@ -510,12 +528,12 @@ new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollar
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.applicationName">applicationName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.applicationName">applicationName</a></code> | <code>string</code> | - the name of application to label resources with it. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | - montly limit in US Dollors. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | - Tag key used to track resources' expenditure. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | - default SNS topic name. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | - optional other stack to track their resources alog with the default stack. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | - list of email address that the CostMonitoring will use to send alerts to. |
 
 ---
 
@@ -527,6 +545,8 @@ public readonly applicationName: string;
 
 - *Type:* string
 
+the name of application to label resources with it.
+
 ---
 
 ##### `monthlyLimitInDollars`<sup>Required</sup> <a name="monthlyLimitInDollars" id="cost-monitoring-construct.ApplicationCostMonitoringProps.property.monthlyLimitInDollars"></a>
@@ -536,6 +556,8 @@ public readonly monthlyLimitInDollars: number;
 ```
 
 - *Type:* number
+
+montly limit in US Dollors.
 
 ---
 
@@ -547,6 +569,10 @@ public readonly costAllocationTag: string;
 
 - *Type:* string
 
+Tag key used to track resources' expenditure.
+
+Only if provided, it will be used to tag the application resources. Defaults to `cm:application`
+
 ---
 
 ##### `defaultTopic`<sup>Optional</sup> <a name="defaultTopic" id="cost-monitoring-construct.ApplicationCostMonitoringProps.property.defaultTopic"></a>
@@ -556,6 +582,10 @@ public readonly defaultTopic: string;
 ```
 
 - *Type:* string
+
+default SNS topic name.
+
+Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
 
 ---
 
@@ -567,6 +597,8 @@ public readonly otherStacksIncludedInBudget: Stack[];
 
 - *Type:* aws-cdk-lib.Stack[]
 
+optional other stack to track their resources alog with the default stack.
+
 ---
 
 ##### `subscribers`<sup>Optional</sup> <a name="subscribers" id="cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers"></a>
@@ -576,6 +608,8 @@ public readonly subscribers: string[];
 ```
 
 - *Type:* string[]
+
+list of email address that the CostMonitoring will use to send alerts to.
 
 ---
 
