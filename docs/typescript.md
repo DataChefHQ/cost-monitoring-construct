@@ -8,17 +8,17 @@ To install the Cost Monitoring Construct package, run the following command to d
 npm i cost-monitoring-construct
 ```
 
-# Usage
+## Usage
 
 The easiest way to apply cost monitoring is by using predefined default budget strategies. The `ApplicationCostMonitoring` has default strategy implementation for monitoring budgets per CDK applications, while the `AccountCostMonitoring` has default strategy implementation for monitoring budgets per account. You can also create your own strategy by creating a class that applies to the `IBudgetStrategy` or directly inherits from the `ApplicationCostMonitoring` or `AccountCostMonitoring` class to customize them to your needs.
 
-## `ApplicationCostMonitoring` Class
+### `ApplicationCostMonitoring` Class
 
 This is the default strategy for monitoring CDK applications. You have to provide at least one stack by the first parameter of the initializer. If you wish to monitor more stacks, you can pass them as a list to the `otherStacksIncludedInBudget` prop.
 
 The `ApplicationCostMonitoring` will always use the first stack (the first parameter of the initializer) to inject its resources into it. You can create a separate stack and pass it as the first stack if you wish to keep cost monitoring separate from your stacks. The cost monitoring class will monitor both the first stack and stacks from `otherStacksIncludedInBudget`.
 
-⚠️ **Important Note**: ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must activate the `cm:application` tag key under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
+> [!WARNING] ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must [activate](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html) your chosen tag key (`cm:application` by default) under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
 
 The example below shows how to use `ApplicationCostMonitoring` to track your application in CDK code:
 
@@ -29,17 +29,18 @@ const monitoringStack = new MonitoringStack(app, "MyAppMonitoringStack", {});
 const firstStack = new FirstStack(app, "FirstStack", {});
 const secondStack = new SecondStack(app, "SecondStack", {});
 const costMonitoring = new ApplicationCostMonitoring(monitoringStack, {
-  //                                the fitst stack ~~~~~~~^~~~~~~
+  //                                the first stack  ~~~~~~~👆~~~~~~
   applicationName: "my-application",
-  monthlyBudget: 200, // Optional (you can add as many stack as you want)
-  otherStacksIncludedInBudget: [secondStack, firstStack],
-  subscribers: ["alert@example.com"],
+  monthlyLimitInDollars: 200,
+  otherStacksIncludedInBudget: [secondStack, firstStack], // Optional (you can add as many stacks as you want)
+  subscribers: ["alert@example.com"], // Optional
+  costAllocationTag: "MyTag"  // Optional, defaults to `cm:application`
 });
 
 costMonitoring.monitor();
 ```
 
-## `IBudgetStrategy` Abstract Class
+### `IBudgetStrategy` Abstract Class
 
 This is the abstract base class that all budget strategies must apply to. This Abstract class enforces the implementation for `createDailyBudgets` and `createMonthlyBudgets`. Plus, it provides the `createQuarterlyBudgets` and `createYearlyBudgets` optional to implement.
 
