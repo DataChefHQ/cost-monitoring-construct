@@ -47,7 +47,6 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * @example
    * Tracking budget for an application called `my-application`
    *
-   * ```ts
    * const app = new cdk.App();
    * const firstStack = new FirstStack(app, 'FirstStack', {});
    * const secondStack = new SecondStack(app, 'SecondStack', {});
@@ -59,7 +58,6 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * });
    *
    * budgetStratgy.monitor();
-   * ```
    */
   constructor(stack: Stack, props: ApplicationCostMonitoringProps) {
     super(stack, props);
