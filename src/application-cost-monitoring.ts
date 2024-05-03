@@ -54,7 +54,7 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    *   applicationName: 'my-application',
    *   monthlyLimitInDollars : 200,
    *   otherStacksToMonitor: [secondStack], // Optional (you can add as many stacks as you want)
-   *   subscribers: ['alert@example.com']
+   *   subscribers: ['alert@mymail.com']
    * });
    *
    * budgetStratgy.monitor();
