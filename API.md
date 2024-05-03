@@ -25,7 +25,7 @@ Cost Monitoring Construct provides the following features:
 - **Integration:** Integrates with various tools and monitoring services, such as AWS Cost Explorer and Datadog.
 
 > [!WARNING]
-> Tags used to create and monitor budgets must first be [activated as cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html). Ensure your chosen one is activated, otherwise the budgets won't work!
+> ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must [activate](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html) your chosen tag key (`cm:application` by default) under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
 
 ## What is it useful for?
 
