@@ -12,7 +12,7 @@ pip install cost-monitoring-construct
 
 Getting started is very simple: just add the following snippet to your code and adapt it to the situation.
 
-Remember to enable the [cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html), otherwise the budgets won't work!
+> [!WARNING] ApplicationCostMonitoring uses AWS Tags to track resources' usages. You must [activate](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html) your chosen tag key (`cm:application` by default) under Cost Allocation Tags. The tag key will appear in the AWS console up to 24 hours after at least one AWS resource has been created with that tag.
 
 ```python
 import aws_cdk as cdk
