@@ -10,6 +10,14 @@ export interface IApplicationCostMonitoringProps extends IBudgetStrategyProps {
 }
 
 export class ApplicationCostMonitoringProps implements IApplicationCostMonitoringProps {
+  /**
+   * @param applicationName - the name of application to label resources with it.
+   * @param monthlyLimitInDollars - montly limit in US Dollors.
+   * @param otherStacksIncludedInBudget - optional other stack to track their resources alog with the default stack.
+   * @param defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
+   * @param subscribers - list of email address that the CostMonitoring will use to send alerts to.
+   * @param costAllocationTag - Tag key used to track resources' expenditure. Only if provided, it will be used to tag the application resources. Defaults to `cm:application`
+   */
   constructor(
     public applicationName: string,
     public monthlyLimitInDollars: number,
@@ -34,26 +42,22 @@ export class ApplicationCostMonitoring extends IBudgetStrategy {
    * @param props.monthlyLimitInDollars - montly limit in US Dollors.
    * @param props.defaultTopic - default SNS topic name. Only if provided, the BudgetStratgy creates an SNS topic and send notifications to it.
    * @param props.subscribers - list of email address that the CostMonitoring will use to send alerts to.
-   * @param props.costAllocationTag - Tag key used to track resources' expenditure. Only if provided, it will be used to tag the application resources.
+   * @param props.costAllocationTag - Tag key used to track resources' expenditure. Only if provided, it will be used to tag the application resources. Defaults to `cm:application`
    *
-   * @example tracking budget for an application called `my-application`:
+   * @example
+   * Tracking budget for an application called `my-application`
+   *
    * const app = new cdk.App();
    * const firstStack = new FirstStack(app, 'FirstStack', {});
    * const secondStack = new SecondStack(app, 'SecondStack', {});
    * const costMonitoring = new ApplicationCostMonitoring(firstStack, {
    *   applicationName: 'my-application',
    *   monthlyLimitInDollars : 200,
-   *  // Optional (you can add as many stack as you want)
-   *   otherStacksToMonitor: [
-   *     secondStack
-   *   ],
-   *   subscribers: [
-   *     'alert@example.com'
-   *   ]
+   *   otherStacksToMonitor: [secondStack], // Optional (you can add as many stacks as you want)
+   *   subscribers: ['alert@example.com']
    * });
    *
    * budgetStratgy.monitor();
-   *
    */
   constructor(stack: Stack, props: ApplicationCostMonitoringProps) {
     super(stack, props);
