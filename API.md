@@ -456,16 +456,16 @@ public readonly applicationName: string;
 ```typescript
 import { ApplicationCostMonitoringProps } from 'cost-monitoring-construct'
 
-new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollars: number, otherStacksIncludedInBudget?: Stack[], defaultTopic?: string, subscribers?: string[], costAllocationTag?: string)
+new ApplicationCostMonitoringProps(applicationName: string, monthlyLimitInDollars: number, subscribers: string[], otherStacksIncludedInBudget?: Stack[], defaultTopic?: string, costAllocationTag?: string)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.applicationName">applicationName</a></code> | <code>string</code> | - the name of application to label resources with it. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | - montly limit in US Dollors. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers">subscribers</a></code> | <code>string[]</code> | - list of email address that the CostMonitoring will use to send alerts to. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | - optional other stack to track their resources alog with the default stack. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.defaultTopic">defaultTopic</a></code> | <code>string</code> | - default SNS topic name. |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers">subscribers</a></code> | <code>string[]</code> | - list of email address that the CostMonitoring will use to send alerts to. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | - Tag key used to track resources' expenditure. |
 
 ---
@@ -483,6 +483,14 @@ the name of application to label resources with it.
 - *Type:* number
 
 montly limit in US Dollors.
+
+---
+
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers"></a>
+
+- *Type:* string[]
+
+list of email address that the CostMonitoring will use to send alerts to.
 
 ---
 
@@ -504,14 +512,6 @@ Only if provided, the BudgetStratgy creates an SNS topic and send notifications 
 
 ---
 
-##### `subscribers`<sup>Optional</sup> <a name="subscribers" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.subscribers"></a>
-
-- *Type:* string[]
-
-list of email address that the CostMonitoring will use to send alerts to.
-
----
-
 ##### `costAllocationTag`<sup>Optional</sup> <a name="costAllocationTag" id="cost-monitoring-construct.ApplicationCostMonitoringProps.Initializer.parameter.costAllocationTag"></a>
 
 - *Type:* string
@@ -530,10 +530,10 @@ Only if provided, it will be used to tag the application resources. Defaults to 
 | --- | --- | --- |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.applicationName">applicationName</a></code> | <code>string</code> | - the name of application to label resources with it. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | - montly limit in US Dollors. |
+| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | - list of email address that the CostMonitoring will use to send alerts to. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | - Tag key used to track resources' expenditure. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | - default SNS topic name. |
 | <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | - optional other stack to track their resources alog with the default stack. |
-| <code><a href="#cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | - list of email address that the CostMonitoring will use to send alerts to. |
 
 ---
 
@@ -558,6 +558,18 @@ public readonly monthlyLimitInDollars: number;
 - *Type:* number
 
 montly limit in US Dollors.
+
+---
+
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers"></a>
+
+```typescript
+public readonly subscribers: string[];
+```
+
+- *Type:* string[]
+
+list of email address that the CostMonitoring will use to send alerts to.
 
 ---
 
@@ -598,18 +610,6 @@ public readonly otherStacksIncludedInBudget: Stack[];
 - *Type:* aws-cdk-lib.Stack[]
 
 optional other stack to track their resources alog with the default stack.
-
----
-
-##### `subscribers`<sup>Optional</sup> <a name="subscribers" id="cost-monitoring-construct.ApplicationCostMonitoringProps.property.subscribers"></a>
-
-```typescript
-public readonly subscribers: string[];
-```
-
-- *Type:* string[]
-
-list of email address that the CostMonitoring will use to send alerts to.
 
 ---
 
@@ -749,8 +749,8 @@ Return default SNS topic only if the defultTopic prop has been passed when insta
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.applicationName">applicationName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.costAllocationTag">costAllocationTag</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IApplicationCostMonitoringProps.property.otherStacksIncludedInBudget">otherStacksIncludedInBudget</a></code> | <code>aws-cdk-lib.Stack[]</code> | *No description.* |
@@ -767,6 +767,16 @@ public readonly monthlyLimitInDollars: number;
 
 ---
 
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="cost-monitoring-construct.IApplicationCostMonitoringProps.property.subscribers"></a>
+
+```typescript
+public readonly subscribers: string[];
+```
+
+- *Type:* string[]
+
+---
+
 ##### `defaultTopic`<sup>Optional</sup> <a name="defaultTopic" id="cost-monitoring-construct.IApplicationCostMonitoringProps.property.defaultTopic"></a>
 
 ```typescript
@@ -774,16 +784,6 @@ public readonly defaultTopic: string;
 ```
 
 - *Type:* string
-
----
-
-##### `subscribers`<sup>Optional</sup> <a name="subscribers" id="cost-monitoring-construct.IApplicationCostMonitoringProps.property.subscribers"></a>
-
-```typescript
-public readonly subscribers: string[];
-```
-
-- *Type:* string[]
 
 ---
 
@@ -950,8 +950,8 @@ public readonly tags: ITag[];
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cost-monitoring-construct.IBudgetStrategyProps.property.monthlyLimitInDollars">monthlyLimitInDollars</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#cost-monitoring-construct.IBudgetStrategyProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cost-monitoring-construct.IBudgetStrategyProps.property.subscribers">subscribers</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#cost-monitoring-construct.IBudgetStrategyProps.property.defaultTopic">defaultTopic</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -965,6 +965,16 @@ public readonly monthlyLimitInDollars: number;
 
 ---
 
+##### `subscribers`<sup>Required</sup> <a name="subscribers" id="cost-monitoring-construct.IBudgetStrategyProps.property.subscribers"></a>
+
+```typescript
+public readonly subscribers: string[];
+```
+
+- *Type:* string[]
+
+---
+
 ##### `defaultTopic`<sup>Optional</sup> <a name="defaultTopic" id="cost-monitoring-construct.IBudgetStrategyProps.property.defaultTopic"></a>
 
 ```typescript
@@ -972,16 +982,6 @@ public readonly defaultTopic: string;
 ```
 
 - *Type:* string
-
----
-
-##### `subscribers`<sup>Optional</sup> <a name="subscribers" id="cost-monitoring-construct.IBudgetStrategyProps.property.subscribers"></a>
-
-```typescript
-public readonly subscribers: string[];
-```
-
-- *Type:* string[]
 
 ---
 
