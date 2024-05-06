@@ -3,8 +3,8 @@ import { Email, SubscriptionType } from "./utils";
 
 export interface IBudgetStrategyProps {
   monthlyLimitInDollars: number;
+  subscribers: Array<Email>;
   defaultTopic?: string;
-  subscribers?: Array<Email>;
 }
 
 export abstract class IBudgetStrategy {

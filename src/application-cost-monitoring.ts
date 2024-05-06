@@ -21,9 +21,9 @@ export class ApplicationCostMonitoringProps implements IApplicationCostMonitorin
   constructor(
     public applicationName: string,
     public monthlyLimitInDollars: number,
+    public subscribers: string[],
     public otherStacksIncludedInBudget?: Stack[],
     public defaultTopic?: string,
-    public subscribers?: string[],
     public costAllocationTag?: string
   ) {}
 }
